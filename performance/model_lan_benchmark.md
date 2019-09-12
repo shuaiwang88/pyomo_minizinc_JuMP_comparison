@@ -1,22 +1,15 @@
-#+ TITLE: Comparing Pyomo, Minizinc, and JuMP for model building
-#+ AUTHOR: Shuai Wang (wang.172@wright.edu)
-
-In this post, we will compare the popular mathematic programming
-language/package: python's pyomo, minizinc, and Juila's JuMP on the context of
-model building. Please see the other post for the syntax comparison.
-
-The motivation behind of this is that the model my collegue built using pyomo
-costs about 25 minutes just to construct(add variables and constriants). After I read this post
-
-
 ---
 title: "Working Note: Construnction speed in popular open-source math modeling tools  "
 author: "Shuai Wang"
 date: "9/11/2019"
 output: html_document
 ---
+In this post, we will compare the popular mathematic programming
+language/package: python's pyomo, minizinc, and Juila's JuMP on the context of
+model building. Please see the other post for the syntax comparison.
 
-I was testing some open-source math modeling tools with Paul yesteraday, due to his mid-sized model takes 25 minutes just to construct using pyomo.
+The motivation behind of this is that the model my collegue built using pyomo
+costs about 25 minutes just to construct(add variables and constriants). After I read this post
 
 
 The modeling tools I tested are: python's pyomo, Julia's JuMP, and Minizinc. 
