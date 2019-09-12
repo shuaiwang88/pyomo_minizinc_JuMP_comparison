@@ -1,19 +1,21 @@
 ---
-title: "Working Note: Construnction speed in popular open-source math modeling tools  "
+title: ' Construction speed in popular open-source math modeling tools  '
 author: "Shuai Wang"
 date: "9/11/2019"
-output: html_document
+output:
+  html_document: default
 ---
 In this post, we will compare the popular mathematic programming
 language/package: python's pyomo, minizinc, and Juila's JuMP on the context of
 model building. Please see the other post for the syntax comparison.
 
-The motivation behind of this is that the model my collegue built using pyomo
-costs about 25 minutes just to construct(add variables and constriants). After I read this post
+The inspirtaion of this is that the model my collegue built using pyomo
+costs about 25 minutes just to construct(1.2 million variables and 2.5
+million constriants). 
 
 
 The modeling tools I tested are: python's pyomo, Julia's JuMP, and Minizinc. 
-I used CBC as MIP solver.
+I used CBC as MIP solver. The machine I used has i7 6820HQ cpu with 16gb ram.
 
 The problem is from stackoverflow:
 [pyomo is slow](https://stackoverflow.com/questions/51269351/pyomo-seems-very-slow-to-write-models),
@@ -25,10 +27,9 @@ which states as:
 $$x[i] >=1,  \forall i \in size$$
 
 ####  objective: 
-$$Minimize \sum_{i}^{set} x[i]$$
+$$Minimize \sum_{i}^{size} x[i]$$
 
-
-## Here are the scripts:
+Here are the comparisons. 
 
 
 ### Python
@@ -51,10 +52,9 @@ $$Minimize \sum_{i}^{set} x[i]$$
   
   opt = pyo.SolverFactory('cbc', io_format='python')
   
-  _time = time.time()
   res = opt.solve(model, report_timing=True)
   print(">>> total time () in {:.2f}s".format(time.time() - start_time))
-  print(res)
+  #print(res)
 
 ```
 
@@ -65,7 +65,7 @@ $$Minimize \sum_{i}^{set} x[i]$$
   using Cbc
   using Dates
   
-  a = Dates.now()  
+  a = Dates.now() 
   
   N = 500000
   m=Model(with_optimizer(Cbc.Optimizer))
@@ -97,10 +97,9 @@ $$Minimize \sum_{i}^{set} x[i]$$
 ## Results:
 
 The time consists of constructing and solve time. The actually sovling time are
-approximately he same because they all call CBC as solver.
+approximately the same because they all call CBC as solver.
 
-For a simple problem with half million variables and constraints, the resultss
-are shown below:
+The resultss (in seconds) are shown below:
 
 | Tools    | N=500000 | N=1000000 | N=2500000 | N=5000000 |
 |----------|----------|-----------|-----------|-----------|
@@ -108,7 +107,5 @@ are shown below:
 | JuMP     |       36 |        48 |       114 |       450 |
 | Minizinc |        9 |        22 |        53 |       109 |
 
-
-Minizinc is the **fastest**, which also having the best syntax style IMO.
-
+Minizinc is the **fastest**, which also having the best syntax style IMO. 
 
