@@ -16,7 +16,6 @@ date: "9/11/2019"
 output: html_document
 ---
 
-#### TLDR: Minizinc is 2x faster than Julia's JuMP and 4x faster than python's pyomo. 
 I was testing some open-source math modeling tools with Paul yesteraday, due to his mid-sized model takes 25 minutes just to construct using pyomo.
 
 
@@ -112,9 +111,9 @@ are shown below:
 
 | Tools    | N=500000 | N=1000000 | N=2500000 | N=5000000 |
 |----------|----------|-----------|-----------|-----------|
-| pyomo    |       89 |         | 432       | 900       |
-| JuMP     |       45 |         | 168       |           |
-| Minizinc |       22 |         | 144       |           |
+| pyomo    |       28 |        57 |       185 |       377 |
+| JuMP     |       36 |        48 |       114 |       450 |
+| Minizinc |        9 |        22 |        53 |       109 |
 
 
 Minizinc is the **fastest**, which also having the best syntax style IMO.
